@@ -1,0 +1,13 @@
+# Agent definition: openclaw-setup-agent
+# This file describes an agent that can use the openclaw-setup skill
+
+name: openclaw-setup-agent
+description: Agent to assist with initializing and maintaining the openclaw infra repository. Uses the openclaw-setup skill for repo bootstrapping tasks.
+skills:
+  - openclaw-setup
+owners:
+  - wjbetech-claw
+runbook: |
+  - When asked to bootstrap a repo, load the openclaw-setup skill and follow its guidance.
+  - Prepare files under workspace root: README, LICENSE, .gitignore, infra/terraform/, .github/workflows/ci.yml, CONTRIBUTING.md, SECURITY.md
+  - Do NOT commit secrets. Use scripts/push-setup.sh to push changes.
