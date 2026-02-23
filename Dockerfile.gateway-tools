@@ -1,0 +1,20 @@
+FROM openclaw:local
+
+USER root
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git curl ca-certificates gnupg \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+    | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+ && chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
+ && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+    > /etc/apt/sources.list.d/github-cli.list \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends gh \
+ && rm -rf /var/lib/apt/lists/*
+
+# IMPORTANT: switch back to the base image user if needed.
+# If openclaw:local uses "node", keep "node". If it uses something else, set it to that.
+USER node

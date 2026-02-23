@@ -1,0 +1,8 @@
+services:
+  openclaw-gateway:
+    volumes:
+      - /home/will/.openclaw/gh-config:/home/node/.config/gh
+    image: openclaw:local-tools
+    build:
+      context: .
+      dockerfile: Dockerfile.gateway-tools
